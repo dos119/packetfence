@@ -1,4 +1,16 @@
 <template>
+<div>
+
+  <the-form
+    :form="formB"
+    :meta="metaB"
+    :isNew="isNew"
+    :isClone="isClone"
+  />
+
+
+
+
   <pf-config-view
     :form-store-name="formStoreName"
     :isLoading="isLoading"
@@ -33,9 +45,14 @@
       </b-card-footer>
     </template>
   </pf-config-view>
+</div>
 </template>
 
 <script>
+import {
+  TheForm
+} from '../roles/_components/'
+
 import pfConfigView from '@/components/pfConfigView'
 import pfButtonSave from '@/components/pfButtonSave'
 import {
@@ -49,8 +66,15 @@ import {
 export default {
   name: 'role-view',
   components: {
+    TheForm,
     pfConfigView,
     pfButtonSave
+  },
+  data () {
+    return {
+      formB: {},
+      metaB: {}
+    }
   },
   props: {
     formStoreName: { // from router
@@ -108,11 +132,13 @@ export default {
     init () {
       this.$store.dispatch('$_roles/options', this.id).then(options => {
         const { meta = {} } = options
+this.metaB = meta
         const { isNew, isClone } = this
         this.$store.dispatch(`${this.formStoreName}/setMeta`, { ...meta, ...{ isNew, isClone } })
         if (this.id) { // existing
           this.$store.dispatch('$_roles/getRole', this.id).then(form => {
             if (this.isClone) form.id = `${form.id}-${this.$i18n.t('copy')}`
+this.formB = form
             this.$store.dispatch(`${this.formStoreName}/setForm`, form)
           })
         } else { // new

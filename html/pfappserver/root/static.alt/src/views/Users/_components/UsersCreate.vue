@@ -254,7 +254,7 @@
 /* eslint-disable no-unused-vars */
 import {
   BaseInput,
-  BaseFormGroupInput
+  BaseFormGroup
 } from '@/components/new/'
 
 
@@ -285,7 +285,7 @@ export default {
   name: 'users-create',
   components: {
     BaseInput,
-    BaseFormGroupInput,
+    BaseFormGroup,
 
     pfFormChosen,
     pfFormDatetime,
