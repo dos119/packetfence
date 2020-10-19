@@ -1484,7 +1484,6 @@ Then, we should tell C to ignore A and B in their cluster configuration. In orde
 
 [source,bash]
 ----
-systemctl start packetfence-config
 /usr/local/pf/bin/cluster/node node-A-hostname disable
 /usr/local/pf/bin/cluster/node node-B-hostname disable
 ----
