@@ -1502,9 +1502,13 @@ The commands above will make sure that nodes A and B will not be forwarding requ
 
 ===== Complete upgrade of node C
 
-
 From that moment node C is in standalone for its database. We can proceed to update the database schema so it matches the one of the latest version.
 In order to do so, upgrade the database schema using the instructions provided in <<PacketFence_Upgrade_Guide.asciidoc#,Upgrade guide>>.
+
+===== Start service on node C
+
+
+Now, start the application service on node C using the instructions provided in <<PacketFence_Upgrade_Guide.asciidoc#_restart_all_packetfence_services,Restart all PacketFence services section>>.
 
 ===== Stop services on nodes A and B
 
@@ -1517,18 +1521,6 @@ PacketFence services section>>
 [source,bash]
 ----
 systemctl stop packetfence-mariadb
-----
-
-===== Start service on node C
-
-
-Now, start the application service on node C:
-
-[source,bash]
-----
-/usr/local/pf/bin/pfcmd fixpermissions
-/usr/local/pf/bin/pfcmd configreload hard
-/usr/local/pf/bin/pfcmd service pf start
 ----
 
 ==== Validate migration
