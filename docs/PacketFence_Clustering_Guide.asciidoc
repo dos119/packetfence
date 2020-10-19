@@ -1650,8 +1650,15 @@ systemctl stop packetfence-mariadb
 ----
 
 You should validate that you are able to connect to the MariaDB database even
-though it is in read-only mode using the MariaDB command line. If its not,
-make sure you check the MariaDB log ([filename]`/usr/local/pf/logs/mariadb_error.log`)
+though it is in read-only mode using the MariaDB command line:
+
+[source,bash]
+----
+mysql -u root -p pf -h localhost
+----
+
+If its not, make sure you check the MariaDB log
+([filename]`/usr/local/pf/logs/mariadb_error.log`)
 
 ===== Sync nodes A and B
 
