@@ -52,7 +52,7 @@ const AuthenticationSourcesList = () => import(/* webpackChunkName: "Configurati
 const AuthenticationSourceView = () => import(/* webpackChunkName: "Configuration" */ '../sources/_components/TheView')
 const NetworkDevicesTabs = () => import(/* webpackChunkName: "Configuration" */ '../_components/NetworkDevicesTabs')
 const SwitchesImport = () => import(/* webpackChunkName: "Editor" */ '../_components/SwitchesImport')
-const SwitchView = () => import(/* webpackChunkName: "Configuration" */ '../_components/SwitchView')
+const SwitchView = () => import(/* webpackChunkName: "Configuration" */ '../switches/_components/TheView')
 const SwitchGroupView = () => import(/* webpackChunkName: "Configuration" */ '../_components/SwitchGroupView')
 const ConnectionProfilesList = () => import(/* webpackChunkName: "Configuration" */ '../_components/ConnectionProfilesList')
 const ConnectionProfileView = () => import(/* webpackChunkName: "Configuration" */ '../_components/ConnectionProfileView')
@@ -429,13 +429,7 @@ const route = {
       path: 'switches/new/:switchGroup',
       name: 'newSwitch',
       component: SwitchView,
-      props: (route) => ({ formStoreName: 'formSwitch', isNew: true, switchGroup: route.params.switchGroup }),
-      beforeEnter: (to, from, next) => {
-        if (!store.state.formSwitch) { // Register store module only once
-          store.registerModule('formSwitch', FormStore)
-        }
-        next()
-      }
+      props: (route) => ({ isNew: true, switchGroup: route.params.switchGroup })
     },
     {
       path: 'switches/import',
@@ -446,11 +440,8 @@ const route = {
       path: 'switch/:id',
       name: 'switch',
       component: SwitchView,
-      props: (route) => ({ formStoreName: 'formSwitch', id: route.params.id }),
+      props: (route) => ({ id: route.params.id }),
       beforeEnter: (to, from, next) => {
-        if (!store.state.formSwitch) { // Register store module only once
-          store.registerModule('formSwitch', FormStore)
-        }
         store.dispatch('$_switches/getSwitch', to.params.id).then(() => {
           next()
         })
@@ -460,11 +451,8 @@ const route = {
       path: 'switch/:id/clone',
       name: 'cloneSwitch',
       component: SwitchView,
-      props: (route) => ({ formStoreName: 'formSwitch', id: route.params.id, isClone: true }),
+      props: (route) => ({ id: route.params.id, isClone: true }),
       beforeEnter: (to, from, next) => {
-        if (!store.state.formSwitch) { // Register store module only once
-          store.registerModule('formSwitch', FormStore)
-        }
         store.dispatch('$_switches/getSwitch', to.params.id).then(() => {
           next()
         })
