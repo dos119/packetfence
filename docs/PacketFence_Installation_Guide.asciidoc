@@ -5151,15 +5151,14 @@ Now go in `Nodes` and click on a MAC address and you will see that a new tab app
 image::TAB.png[scaledwidth="100%",alt="Node TAB"]
 
 
-Monit
-~~~~~
+=== Monit
 
 `monit` is a utility for managing and monitoring processes, files, directories and filesystems on a Unix system. Monit conducts automatic maintenance and repair and can execute meaningful causal actions in error situations. E.g. Monit can start a process if it does not run, restart a process if it does not respond and stop a process if it uses too much resources.
 
 For further reference the monit documentation is available at: https://mmonit.com/monit/documentation/monit.html
 
-Install Monit
-^^^^^^^^^^^^^
+==== Install Monit
+
 
 The following must be done on each server of a cluster
 
@@ -5177,15 +5176,15 @@ apt-get install monit
 ----
 
 
-Fetch the script signing key
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Fetch the script signing key
+
 ----
 gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E3A28334
 ----
 
 
-Download the Packetfence monit addons
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Download the Packetfence monit addons
+
 The monit addons are included with Packetfence at
 `/usr/local/pf/addons/monit`. This step is only needed if you want to upgrade
 the scripts to the latest version without having to upgrade Packetfence. This
@@ -5203,8 +5202,8 @@ mv /usr/local/pf/addons/monit /usr/local/pf/addons/monit.old ; mv /tmp/monit /us
 ----
 
 
-Generate the monit configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Generate/Regenerate the monit configuration
+
 ----
 /usr/local/pf/addons/monit/monit_build_configuration.pl 'email(s)' 'subject' 'configurations' 'mailserver'
 ----
@@ -5224,7 +5223,7 @@ Where :
 
 CAUTION: A MTA is needed to correctly relay emails from monit. If _localhost_ is used as `mailserver`, make sure that a MTA is installed and configured on the server. 
 
-NOTE: This command will create configuration scripts in `/etc/monit.d/`, but it will not remove old(er) scripts from an earlier installation. During an upgrade any unused `/etc/monit.d/*.conf` files will need to be removed manually.
+NOTE: This command will create configuration scripts in `/etc/monit.d/`, but it will not remove old(er) scripts from an earlier installation. During an upgrade any unused `/etc/monit.d/*.conf` files will be renamed to [filename]`/etc/monit.d/*.conf.bak`.
 
 
 Include the generated configurations in the monit config
