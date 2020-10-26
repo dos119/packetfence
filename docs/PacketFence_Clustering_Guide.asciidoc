@@ -1681,22 +1681,13 @@ start node C normally (using `systemctl start packetfence-mariadb`).
 ===== Start nodes A and B
 
 
-You can now safely start PacketFence on nodes A and B using:
-
-[source,bash]
-----
-/usr/local/pf/bin/pfcmd service pf restart
-----
+You can now safely start PacketFence on nodes A and B using the instructions provided in <<PacketFence_Upgrade_Guide.asciidoc#_restart_all_packetfence_services,Restart all PacketFence services section>>.
 
 ==== Restart node C
 
 
-Now, you should restart PacketFence on node C so it becomes aware of its peers again.
-
-[source,bash]
-----
-/usr/local/pf/bin/pfcmd service pf restart
-----
+Now, you should restart PacketFence on node C using the instructions provided in <<PacketFence_Upgrade_Guide.asciidoc#_restart_all_packetfence_services,Restart all PacketFence services section>>.
+So it becomes aware of its peers again.
 
 You should now have full service on all 3 nodes using the latest version of PacketFence.
 
